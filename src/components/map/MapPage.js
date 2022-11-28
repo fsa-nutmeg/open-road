@@ -1,11 +1,11 @@
-import MyMap from "./Map";
+import Map from "./Map";
 
 const MapPage = () => {
   return (
     <div className="map-display">
-      <MyMap />
+      <Map />
     </div>
   );
 };
 
-export default MapPage;
+export default Map;
