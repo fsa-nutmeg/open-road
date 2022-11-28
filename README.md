@@ -13,7 +13,19 @@ This is an app that allows you to filter routes in a nontraditional sense.
 ## Stretch Goals
 - A user will be able to upvote, or rate a route to increase its popularity.
 - A user will be able to make a route public and rate/comment on the experience.
+- A user will be able to follow other users and preview their routes as a 'suggestion'
+- A user will be able to earn 'badges' based on miles traveled or for creating popular routes.
+- A user will be given suggestions based on routes created by badged users.
 - We will create a mobile app to support our web application.
+
+## Routes (* means admin protected)(# means user specific)
+- get all Users*
+- get #, update #*, delete #*, create single User #*
+- get, update *, delete *, create single Route
+- get all Routes
+- get all popular Routes
+- create #, delete * single Comment
+- get all Comments
 
 ## Tech Stack
 - React (w/ hooks)
