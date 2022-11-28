@@ -4,13 +4,8 @@ import mapboxgl from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import "../../map.css";
 
-mapboxgl.accessToken = `pk.eyJ1IjoiamFsYmFyYWwiLCJhIjoiY2w5dm5nZmpxMDdzMDNvbTY3OW5qaDA5cSJ9.FG1p16y20g8KwHWCriDrPA`;
+mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
-const directions = new MapboxDirections({
-  accessToken: `pk.eyJ1IjoiamFsYmFyYWwiLCJhIjoiY2w5dm5nZmpxMDdzMDNvbTY3OW5qaDA5cSJ9.FG1p16y20g8KwHWCriDrPA`,
-  unit: "metric",
-  profile: "mapbox/cycling",
-});
 export default function Map() {
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -28,7 +23,7 @@ export default function Map() {
     });
     map.current.addControl(
       new MapboxDirections({
-        accessToken: `pk.eyJ1IjoiamFsYmFyYWwiLCJhIjoiY2w5dm5nZmpxMDdzMDNvbTY3OW5qaDA5cSJ9.FG1p16y20g8KwHWCriDrPA`,
+        accessToken: mapboxgl.accessToken,
       }),
       "top-left"
     );
