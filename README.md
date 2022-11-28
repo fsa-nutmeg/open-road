@@ -42,3 +42,6 @@ This is an app that allows you to filter routes in a nontraditional sense.
 
 ## Project Board
 [Project Board](https://github.com/orgs/fsa-nutmeg/projects/2/views/1)
+
+## Team Contract
+[Team Contract](https://docs.google.com/document/d/1l7gZSweWuQaEjdgnlw57mPh5S_VQ5SvhI6wwOpPVYfg/edit)
