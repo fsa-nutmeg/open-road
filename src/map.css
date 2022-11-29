@@ -491,7 +491,7 @@
 
 .mapbox-marker-drag-icon {
   display: block;
-  background-color: #444;
+  background-color: rgb(163, 28, 28);
   border-radius: 50%;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
