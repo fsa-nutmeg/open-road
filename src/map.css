@@ -1,3 +1,8 @@
+container {
+  height: 100%;
+  width: 100%;
+}
+
 .map-container {
   display: flex;
   height: 100vw;
@@ -266,8 +271,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: #d80909;
-  color: #fff;
+  background: #d1d5db;
+  color: rgb(5, 4, 4);
   padding: 0;
   width: 40px;
   height: 40px;
@@ -281,7 +286,7 @@
   height: 40px;
 }
 .mapbox-directions-origin .mapbox-form-label {
-  background-color: #3bb2d0;
+  background-color: #1f2937;
   border-radius: 3px 0 0 0;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
@@ -316,7 +321,7 @@
 }
 
 .mapbox-directions-profile {
-  background: #fff;
+  background: #1f2937;
   margin: 7px 0 0;
   padding: 2px;
   border-radius: 15px;
@@ -329,7 +334,7 @@
   border-radius: 16px;
   padding: 3px 5px;
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.5);
+  color: #eee;
   line-height: 20px;
   text-align: center;
   width: 25%;
@@ -343,8 +348,8 @@
 }
 .mapbox-directions-profile input[type="radio"]:checked + label:hover,
 .mapbox-directions-profile input[type="radio"]:checked + label {
-  background: #eee;
-  color: rgba(0, 0, 0, 0.75);
+  background: #d1d5db;
+  color: #1f2937;
 }
 
 /* Routes */
@@ -491,7 +496,7 @@
 
 .mapbox-marker-drag-icon {
   display: block;
-  background-color: rgb(163, 28, 28);
+  background-color: rgb(55, 163, 28);
   border-radius: 50%;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 }
