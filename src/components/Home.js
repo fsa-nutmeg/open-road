@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
 import { Button } from "react-bootstrap";
 const Home = () => {
