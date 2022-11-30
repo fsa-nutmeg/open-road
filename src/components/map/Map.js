@@ -20,6 +20,7 @@ export default function Map() {
       style: "mapbox://styles/nutmegs1/clb2fo0ua000a14mj5t28j8c3",
       center: [lng, lat],
       zoom: zoom,
+      pitch: 60,
     });
     map.current.addControl(
       new MapboxDirections({
@@ -27,7 +28,25 @@ export default function Map() {
       }),
       "top-left"
     );
-  });
+    map.current.on("load", () => {
+      map.current.addSource("mapbox-dem", {
+        type: "raster-dem",
+        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+        tileSize: 512,
+        maxZoom: 16,
+      });
+      map.current.setTerrain({ source: "mapbox-dem", exaggeration: 2.5 });
+      map.current.addLayer({
+        id: "sky",
+        type: "sky",
+        paint: {
+          "sky-type": "atmosphere",
+          "sky-atmosphere-sun": [0.0, 90.0],
+          "sky-atmosphere-sun-intensity": 15,
+        },
+      });
+    });
+  }, []);
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
@@ -38,15 +57,8 @@ export default function Map() {
     });
   });
 
-  // useEffect(() => {
-  //   if (!map.current) return;
-  // });
-
   return (
     <div>
-      {/* <div className="sidebar">
-        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-      </div> */}
       <div ref={mapContainer} className="map-container" />
     </div>
   );
