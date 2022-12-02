@@ -23,18 +23,25 @@ export default function Map() {
       zoom: zoom,
       pitch: 60,
     });
-    map.current.addControl(
-      new MapboxDirections({
-        accessToken: mapboxgl.accessToken,
-        profile: "mapbox/driving",
-        alternatives: false,
-        geometries: "geojson",
-        controls: { instructions: true },
-        flyTo: true,
-      }),
-      "top-left"
-    );
-
+    let mapboxDirections = new MapboxDirections({
+      accessToken: mapboxgl.accessToken,
+      profile: "mapbox/driving",
+      alternatives: false,
+      geometries: "geojson",
+      controls: { instructions: true },
+      flyTo: true,
+    });
+    map.current.addControl(mapboxDirections, "top-left");
+    mapboxDirections.on("origin", (test) => {
+      console.log("map origin: ");
+      console.log("origin test: ", test);
+      console.log(mapboxDirections.getOrigin());
+    });
+    mapboxDirections.on("destination", (test) => {
+      console.log("map destination: ");
+      console.log("dest test: ", test);
+      console.log(mapboxDirections.getDestination());
+    });
     //current location
     map.current.addControl(
       new mapboxgl.GeolocateControl({
