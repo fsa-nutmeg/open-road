@@ -34,6 +34,7 @@ export default function Map() {
       }),
       "top-left"
     );
+
     //current location
     map.current.addControl(
       new mapboxgl.GeolocateControl({
@@ -95,7 +96,7 @@ export default function Map() {
         },
       });
     });
-  }, []);
+  });
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
