@@ -1,9 +1,10 @@
-import "mapbox-gl/dist/mapbox-gl.css";
-import React, { useRef, useEffect, useState } from "react";
-import mapboxgl from "mapbox-gl";
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "../../map.css";
-import toTheSunCoordinates from "./testCoordinates.json";
+import 'mapbox-gl/dist/mapbox-gl.css';
+import React, { useRef, useEffect, useState } from 'react';
+import mapboxgl from 'mapbox-gl';
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import '../../map.css';
+import toTheSunCoordinates from './testCoordinates.json';
+import { Navigate } from 'react-router-dom';
 
 mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
@@ -13,35 +14,39 @@ export default function Map() {
   const [lng, setLng] = useState(-113.9);
   const [lat, setLat] = useState(48.35);
   const [zoom, setZoom] = useState(9);
+  const [mBDirections, setMBDirections] = useState(null);
+  const [redirect, updateRedirect] = useState(false);
+  let mapboxDirections = null;
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/nutmegs1/clb2fo0ua000a14mj5t28j8c3",
+      style: 'mapbox://styles/nutmegs1/clb2fo0ua000a14mj5t28j8c3',
       center: [lng, lat],
       zoom: zoom,
       pitch: 60,
     });
-    let mapboxDirections = new MapboxDirections({
+    const mapboxDirections = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
-      profile: "mapbox/driving",
+      profile: 'mapbox/driving',
       alternatives: false,
-      geometries: "geojson",
+      geometries: 'geojson',
       controls: { instructions: true },
       flyTo: true,
     });
-    map.current.addControl(mapboxDirections, "top-left");
-    mapboxDirections.on("origin", (test) => {
-      console.log("map origin: ");
-      console.log("origin test: ", test);
-      console.log(mapboxDirections.getOrigin());
+    map.current.addControl(mapboxDirections, 'top-left');
+    mapboxDirections.on('origin', test => {
+      //console.log('map origin: ');
+      //console.log('origin test: ', test);
+      //console.log(mapboxDirections.getOrigin());
     });
-    mapboxDirections.on("destination", (test) => {
-      console.log("map destination: ");
-      console.log("dest test: ", test);
-      console.log(mapboxDirections.getDestination());
+    mapboxDirections.on('destination', test => {
+      //console.log('map destination: ');
+      //console.log('dest test: ', test);
+      //console.log(mapboxDirections.getDestination());
     });
+    setMBDirections(mapboxDirections);
     //current location
     map.current.addControl(
       new mapboxgl.GeolocateControl({
@@ -53,53 +58,53 @@ export default function Map() {
         // Draw an arrow next to the location dot to indicate which direction the device is heading.
         showUserHeading: true,
       }),
-      "top-left"
+      'top-left'
     );
     //terrain
-    map.current.on("load", () => {
-      map.current.addSource("mapbox-dem", {
-        type: "raster-dem",
-        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+    map.current.on('load', () => {
+      map.current.addSource('mapbox-dem', {
+        type: 'raster-dem',
+        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
         tileSize: 512,
         maxZoom: 16,
       });
-      map.current.setTerrain({ source: "mapbox-dem", exaggeration: 2.5 });
+      map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 2.5 });
       map.current.addLayer({
-        id: "sky",
-        type: "sky",
+        id: 'sky',
+        type: 'sky',
         paint: {
-          "sky-type": "atmosphere",
-          "sky-atmosphere-sun": [0.0, 90.0],
-          "sky-atmosphere-sun-intensity": 15,
+          'sky-type': 'atmosphere',
+          'sky-atmosphere-sun': [0.0, 90.0],
+          'sky-atmosphere-sun-intensity': 15,
         },
       });
     });
-    console.log("map.current.on({route})", map.current.on("route"));
+    console.log('map.current.on({route})', map.current.on('route'));
 
     //route a trip
-    map.current.on("load", () => {
-      map.current.addSource("route", {
-        type: "geojson",
+    map.current.on('load', () => {
+      map.current.addSource('route', {
+        type: 'geojson',
         data: {
-          type: "Feature",
+          type: 'Feature',
           properties: {},
           geometry: {
-            type: "LineString",
+            type: 'LineString',
             coordinates: toTheSunCoordinates,
           },
         },
       });
       map.current.addLayer({
-        id: "route",
-        type: "line",
-        source: "route",
+        id: 'route',
+        type: 'line',
+        source: 'route',
         layout: {
-          "line-join": "round",
-          "line-cap": "round",
+          'line-join': 'round',
+          'line-cap': 'round',
         },
         paint: {
-          "line-color": "#000000",
-          "line-width": 8,
+          'line-color': '#000000',
+          'line-width': 8,
         },
       });
     });
@@ -107,7 +112,7 @@ export default function Map() {
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
-    map.current.on("move", () => {
+    map.current.on('move', () => {
       setLng(map.current.getCenter().lng.toFixed(4));
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
@@ -115,29 +120,48 @@ export default function Map() {
   });
 
   useEffect(() => {
+    /*
     if (!map.current) return; // wait for map to initialize
-    console.log("useEffect Triggerd........");
-    console.log("map.current.on ", map.current.on);
-    map.current.on("origin", (test) => {
-      console.log("map origin: ");
-      console.log("origin test: ", test);
+    console.log('useEffect Triggerd........');
+    console.log('map.current.on ', map.current.on);
+    map.current.on('origin', test => {
+      console.log('map origin: ');
+      console.log('origin test: ', test);
       console.log(map.current.getOrigin());
     });
-    map.current.on("destination", (test) => {
-      console.log("map destination: ");
-      console.log("dest test: ", test);
+    map.current.on('destination', test => {
+      console.log('map destination: ');
+      console.log('dest test: ', test);
       console.log(map.current.getDestination());
     });
-    map.current.on("route", (test) => {
-      console.log("map route: ");
-      console.log("route test: ", test);
+    map.current.on('route', test => {
+      console.log('map route: ');
+      console.log('route test: ', test);
       console.log(map.current.getRoute());
     });
+    */
   });
 
+  const handleClick = e => {
+    e.preventDefault();
+    if (mBDirections !== null) {
+      const origin = mBDirections.getOrigin().geometry.coordinates;
+      const dest = mBDirections.getDestination().geometry.coordinates;
+
+      if (origin.length && dest.length) {
+        // save origin and dest to local storage
+        localStorage.setItem('origin', JSON.stringify(origin));
+        localStorage.setItem('dest', JSON.stringify(dest));
+        updateRedirect(true);
+      }
+    }
+  };
+
+  if (redirect) return <Navigate to='/createTripForm' />;
   return (
     <div>
-      <div ref={mapContainer} className="map-container" />
+      <div ref={mapContainer} className='map-container' />
+      <button onClick={e => handleClick(e)}>Save Trip</button>
     </div>
   );
 }
