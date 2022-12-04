@@ -1,5 +1,6 @@
 import Map from "./map/Map";
 import "../map.css";
+import MapAnimation from "./map/MapAnimation";
 
 const MapPage = () => {
   return (
@@ -103,6 +104,7 @@ const MapPage = () => {
             <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div> */}
             <div>
               <Map />
+              <MapAnimation />
             </div>
           </main>
         </div>
