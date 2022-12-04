@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 
 mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
-export default function Map() {
+export default function Map(props) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-113.9);
@@ -36,16 +36,7 @@ export default function Map() {
       flyTo: true,
     });
     map.current.addControl(mapboxDirections, 'top-left');
-    mapboxDirections.on('origin', test => {
-      //console.log('map origin: ');
-      //console.log('origin test: ', test);
-      //console.log(mapboxDirections.getOrigin());
-    });
-    mapboxDirections.on('destination', test => {
-      //console.log('map destination: ');
-      //console.log('dest test: ', test);
-      //console.log(mapboxDirections.getDestination());
-    });
+
     setMBDirections(mapboxDirections);
     //current location
     map.current.addControl(
@@ -79,35 +70,47 @@ export default function Map() {
         },
       });
     });
-    console.log('map.current.on({route})', map.current.on('route'));
 
     //route a trip
-    map.current.on('load', () => {
-      map.current.addSource('route', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates: toTheSunCoordinates,
+    if (props.coordinates) {
+      const { coordinates } = props;
+
+      map.current.on('load', () => {
+        map.current.addSource('route', {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: coordinates,
+            },
           },
-        },
+        });
+        map.current.addLayer({
+          id: 'route',
+          type: 'line',
+          source: 'route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#000000',
+            'line-width': 8,
+          },
+        });
       });
-      map.current.addLayer({
-        id: 'route',
-        type: 'line',
-        source: 'route',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round',
-        },
-        paint: {
-          'line-color': '#000000',
-          'line-width': 8,
-        },
-      });
-    });
+
+      mapboxDirections.setOrigin(coordinates[0]);
+
+      mapboxDirections.setDestination(coordinates[coordinates.length - 1]);
+      
+      for (let i = 1; i < coordinates.length - 1; i += 1) {
+        mapboxDirections.setWaypoint(i - 1, coordinates[i]);
+      }
+      
+    }
   });
 
   useEffect(() => {
