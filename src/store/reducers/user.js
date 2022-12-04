@@ -12,7 +12,7 @@ const slice = createSlice({
   },
   reducers: {
     getUser: (state, action) => {
-      if (state.user?.refId != action.payload?.refId)
+      if (state.user?.id !== action.payload?.id)
         state.user = action.payload;
     },
   },

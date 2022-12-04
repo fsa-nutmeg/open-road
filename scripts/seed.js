@@ -1,11 +1,11 @@
-const db = require('../server/db');
+const db = require('./seedDB');
 const { faker } = require('@faker-js/faker');
 const { getDatabase, ref, child, push, update } = require('firebase/database');
 ////////////////////////////////////////////////////////////////////////////////
 // CREATING USERS
 ////////////////////////////////////////////////////////////////////////////////
 const createUser = (
-  refId,
+  uid,
   identifier,
   likedTrips,
   savedTrips,
@@ -16,7 +16,7 @@ const createUser = (
 ) => {
   // A user entry.
   const userData = {
-    refId: refId,
+    uid: uid,
     identifier: identifier,
     likedTrips: likedTrips,
     savedTrips: savedTrips,
@@ -71,7 +71,7 @@ function randomBadges() {
 
 // Create 20 users
 for (let i = 0; i < 20; i++) {
-  const refId = i + 1;
+  const uid = i + 1;
   const identifier = faker.internet.email();
   const likedTrips = randomArrayOfInts();
   const savedTrips = randomArrayOfInts();
@@ -81,7 +81,7 @@ for (let i = 0; i < 20; i++) {
   const badges = randomBadges();
 
   createUser(
-    refId,
+    uid,
     identifier,
     likedTrips,
     savedTrips,
@@ -95,10 +95,11 @@ console.log('created all users!!!!!!!!!!!!\n\n');
 ////////////////////////////////////////////////////////////////////////////////
 // CREATING TRIPS
 ////////////////////////////////////////////////////////////////////////////////
+const tripIds = [];
 const createTrip = tripData => {
   // Get a key for a new Post.
   const newTripKey = push(child(ref(db), 'trips')).key;
-
+  tripIds.push(newTripKey);
   // Write the new trip's data in the trips list.
   const updates = {};
   updates['/trips/' + newTripKey] = tripData;
@@ -112,17 +113,14 @@ const createTrip = tripData => {
     });
 };
 
-let tripId = 1;
-
 const goingToTheSunRoad = {};
 
 goingToTheSunRoad.coordinates = require('./trips/goingToTheSunRoad.json');
 goingToTheSunRoad.name = 'Going-To-The-Sun Road';
 goingToTheSunRoad.owner = 1;
 goingToTheSunRoad.curveFactor = 5.5;
-goingToTheSunRoad.likes = [1, 3, 5, 44, 66];
+goingToTheSunRoad.likes = [1, 3, 5];
 goingToTheSunRoad.featured = true;
-goingToTheSunRoad.refId = tripId++;
 
 createTrip(goingToTheSunRoad);
 
@@ -134,7 +132,6 @@ pacificCoastHighway.owner = 1;
 pacificCoastHighway.curveFactor = 4;
 pacificCoastHighway.likes = [1, 2, 3, 4, 5];
 pacificCoastHighway.featured = true;
-pacificCoastHighway.refId = tripId++;
 
 createTrip(pacificCoastHighway);
 
@@ -146,7 +143,6 @@ peakToPeakHighway.owner = 2;
 peakToPeakHighway.curveFactor = 3.9;
 peakToPeakHighway.likes = [1, 2, 7, 13];
 peakToPeakHighway.featured = true;
-peakToPeakHighway.refId = tripId++;
 
 createTrip(peakToPeakHighway);
 
@@ -158,7 +154,6 @@ guadalupeRiverRoad.owner = 3;
 guadalupeRiverRoad.curveFactor = 2.9;
 guadalupeRiverRoad.likes = [1, 2, 3, 4];
 guadalupeRiverRoad.featured = true;
-guadalupeRiverRoad.refId = tripId++;
 
 createTrip(guadalupeRiverRoad);
 console.log('created all trips!!!!!!!!!!!!\n\n');
@@ -175,7 +170,7 @@ const createComment = commentData => {
 
   update(ref(db), updates)
     .then(() => {
-      console.log('made comment: ', commentData.refId);
+      console.log('made comment: ', commentData.routeId);
     })
     .catch(err => {
       console.log(err);
@@ -185,9 +180,8 @@ const createComment = commentData => {
 for (let i = 0; i < 25; i += 1) {
   const comment = {};
 
-  comment.refId = i + 1;
   comment.userId = Math.ceil(Math.random() * 20);
-  comment.routeId = Math.ceil(Math.random() * 4);
+  comment.routeId = tripIds[Math.floor(Math.random() * tripIds.length)];
   comment.text = faker.lorem.text();
 
   createComment(comment);

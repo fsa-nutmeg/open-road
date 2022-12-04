@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import user from './reducers/user';
 import allUsers from './reducers/allUsers';
+import trip from './reducers/trip';
+import user from './reducers/user';
 
 const reducer = combineReducers({
-  user,
   allUsers,
+  trip,
+  user,
 });
 
 const store = configureStore({
