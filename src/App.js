@@ -28,10 +28,6 @@ function App() {
 
   return (
     <UserAuthContextProvider>
-      <Admin dashboard={Dashboard} dataProvider={dataProvider}>
-        <Resource name="users" list={UserList} recordRepresentation="name" />
-        <Resource name="posts" list={PostList} edit={EditGuesser} />
-      </Admin>
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Login />} />
