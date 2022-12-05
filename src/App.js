@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { UserAuthContextProvider } from "./context/userAuthContext";
 import MapPage from "./components/MapPage";
-import StoreAdmin from "./StoreAdmin";
+import StoreAdmin from "./admin/StoreAdmin";
 
 function App() {
   return (

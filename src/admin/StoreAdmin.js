@@ -3,7 +3,6 @@ import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./users";
 import { PostList } from "./posts";
 import Dashboard from "./Dashboard";
-import { Routes, Route } from "react-router-dom";
 
 const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
 
