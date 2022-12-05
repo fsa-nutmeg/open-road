@@ -5,8 +5,8 @@ container {
 
 .map-container {
   display: flex;
-  height: 100vw;
-  width: 100vw;
+  height: 70vw;
+  width: 90vw;
 }
 
 .page-container {
@@ -411,7 +411,7 @@ container {
   overflow: scroll;
 }
 .mapbox-directions-instructions-wrapper {
-  max-height: 50vh;
+  max-height: 30vh;
 }
 .mapbox-directions-routes {
   margin-left: 5px;

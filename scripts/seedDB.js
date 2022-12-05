@@ -1,7 +1,7 @@
 //const app = require('../../src/firebase-config');
 const { initializeApp } = require('firebase/app');
 const { getDatabase } = require('firebase/database');
-const secrets = require('../../bin/secrets');
+const secrets = require('./secrets');
 
 const firebaseConfig = {
   apiKey: secrets.REACT_APP_FIREBASE_API_KEY,
