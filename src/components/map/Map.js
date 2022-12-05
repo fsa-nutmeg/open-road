@@ -4,15 +4,19 @@ import mapboxgl from 'mapbox-gl';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import '../../map.css';
 import toTheSunCoordinates from './testCoordinates.json';
+import { Navigate } from 'react-router-dom';
 
 mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
-export default function Map() {
+export default function Map(props) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-113.9);
   const [lat, setLat] = useState(48.35);
   const [zoom, setZoom] = useState(9);
+  const [mBDirections, setMBDirections] = useState(null);
+  const [redirect, updateRedirect] = useState(false);
+  let mapboxDirections = null;
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -23,17 +27,17 @@ export default function Map() {
       zoom: zoom,
       pitch: 60,
     });
-    map.current.addControl(
-      new MapboxDirections({
-        accessToken: mapboxgl.accessToken,
-        profile: 'mapbox/driving',
-        alternatives: false,
-        geometries: 'geojson',
-        controls: { instructions: true },
-        flyTo: true,
-      }),
-      'top-left'
-    );
+    const mapboxDirections = new MapboxDirections({
+      accessToken: mapboxgl.accessToken,
+      profile: 'mapbox/driving',
+      alternatives: false,
+      geometries: 'geojson',
+      controls: { instructions: true },
+      flyTo: true,
+    });
+    map.current.addControl(mapboxDirections, 'top-left');
+
+    setMBDirections(mapboxDirections);
     //current location
     map.current.addControl(
       new mapboxgl.GeolocateControl({
@@ -66,36 +70,48 @@ export default function Map() {
         },
       });
     });
-    console.log('map.current.on({route})', map.current.on('route'));
 
     //route a trip
-    map.current.on('load', () => {
-      map.current.addSource('route', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates: toTheSunCoordinates,
+    if (props.coordinates) {
+      const { coordinates } = props;
+
+      map.current.on('load', () => {
+        map.current.addSource('route', {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: coordinates,
+            },
           },
-        },
+        });
+        map.current.addLayer({
+          id: 'route',
+          type: 'line',
+          source: 'route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#000000',
+            'line-width': 8,
+          },
+        });
       });
-      map.current.addLayer({
-        id: 'route',
-        type: 'line',
-        source: 'route',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round',
-        },
-        paint: {
-          'line-color': '#000000',
-          'line-width': 8,
-        },
-      });
-    });
-  }, []);
+
+      mapboxDirections.setOrigin(coordinates[0]);
+
+      mapboxDirections.setDestination(coordinates[coordinates.length - 1]);
+      
+      for (let i = 1; i < coordinates.length - 1; i += 1) {
+        mapboxDirections.setWaypoint(i - 1, coordinates[i]);
+      }
+      
+    }
+  });
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
@@ -107,6 +123,7 @@ export default function Map() {
   });
 
   useEffect(() => {
+    /*
     if (!map.current) return; // wait for map to initialize
     console.log('useEffect Triggerd........');
     console.log('map.current.on ', map.current.on);
@@ -125,11 +142,29 @@ export default function Map() {
       console.log('route test: ', test);
       console.log(map.current.getRoute());
     });
+    */
   });
 
+  const handleClick = e => {
+    e.preventDefault();
+    if (mBDirections !== null) {
+      const origin = mBDirections.getOrigin().geometry.coordinates;
+      const dest = mBDirections.getDestination().geometry.coordinates;
+
+      if (origin.length && dest.length) {
+        // save origin and dest to local storage
+        localStorage.setItem('origin', JSON.stringify(origin));
+        localStorage.setItem('dest', JSON.stringify(dest));
+        updateRedirect(true);
+      }
+    }
+  };
+
+  if (redirect) return <Navigate to='/createTripForm' />;
   return (
     <div>
       <div ref={mapContainer} className='map-container' />
+      <button onClick={e => handleClick(e)}>Save Trip</button>
     </div>
   );
 }
