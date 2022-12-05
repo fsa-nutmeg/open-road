@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import { UserAuthContextProvider } from "./context/userAuthContext";
 import MapPage from "./components/MapPage";
 import StoreAdmin from "./StoreAdmin";
+import NewsPage from "./components/NewsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/admin/*" element={<StoreAdmin />} />
+        <Route path="/news" element={<NewsPage />} />
       </Routes>
     </UserAuthContextProvider>
   );
