@@ -16,6 +16,7 @@ export default function Map(props) {
   const [zoom, setZoom] = useState(9);
   const [mBDirections, setMBDirections] = useState(null);
   const [redirect, updateRedirect] = useState(false);
+  const [routeDrawn, drawLine] = useState(false);
   let mapboxDirections = null;
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Map(props) {
       zoom: zoom,
       pitch: 60,
     });
+
     const mapboxDirections = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       profile: 'mapbox/driving',
@@ -35,6 +37,7 @@ export default function Map(props) {
       controls: { instructions: true },
       flyTo: true,
     });
+
     map.current.addControl(mapboxDirections, 'top-left');
 
     setMBDirections(mapboxDirections);
@@ -52,6 +55,7 @@ export default function Map(props) {
       'top-left'
     );
     //terrain
+
     map.current.on('load', () => {
       map.current.addSource('mapbox-dem', {
         type: 'raster-dem',
@@ -72,44 +76,64 @@ export default function Map(props) {
     });
 
     //route a trip
-    if (props.coordinates) {
+  });
+
+  useEffect(() => {
+    if (!routeDrawn && mBDirections !== null && props.coordinates) {
+      console.log('drawing route line');
       const { coordinates } = props;
 
-      map.current.on('load', () => {
-        map.current.addSource('route', {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-              type: 'LineString',
-              coordinates: coordinates,
-            },
-          },
-        });
-        map.current.addLayer({
-          id: 'route',
-          type: 'line',
-          source: 'route',
-          layout: {
-            'line-join': 'round',
-            'line-cap': 'round',
-          },
-          paint: {
-            'line-color': '#000000',
-            'line-width': 8,
-          },
-        });
-      });
+      // map.current.on('load', () => {
+      //   map.current.addSource('route', {
+      //     type: 'geojson',
+      //     data: {
+      //       type: 'Feature',
+      //       properties: {},
+      //       geometry: {
+      //         type: 'LineString',
+      //         coordinates: coordinates,
+      //       },
+      //     },
+      //   });
+      //   map.current.addLayer({
+      //     id: 'route',
+      //     type: 'line',
+      //     source: 'route',
+      //     layout: {
+      //       'line-join': 'round',
+      //       'line-cap': 'round',
+      //     },
+      //     paint: {
+      //       'line-color': '#000000',
+      //       'line-width': 8,
+      //     },
+      //   });
+      // });
 
-      mapboxDirections.setOrigin(coordinates[0]);
+      mBDirections.setOrigin(coordinates[0]);
 
-      mapboxDirections.setDestination(coordinates[coordinates.length - 1]);
-      
+      mBDirections.setDestination(coordinates[coordinates.length - 1]);
+
       for (let i = 1; i < coordinates.length - 1; i += 1) {
-        mapboxDirections.setWaypoint(i - 1, coordinates[i]);
+        mBDirections.setWaypoint(i - 1, coordinates[i]);
       }
-      
+
+      setMBDirections(mBDirections);
+      drawLine(true);
+      // simulate mouse hover to render route line
+      function simulateMouseover() {
+        var event = new MouseEvent('mouseover', {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+        });
+        var myTarget = document.getElementsByClassName(
+          'mapbox-directions-step'
+        )[0];
+        var canceled = !myTarget.dispatchEvent(event);
+        console.log('cancelled, ', canceled);
+      }
+      setTimeout(simulateMouseover, 2000);
     }
   });
 
@@ -168,3 +192,17 @@ export default function Map(props) {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
