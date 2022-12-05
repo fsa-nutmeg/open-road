@@ -133,7 +133,7 @@ export default function Map(props) {
         var canceled = !myTarget.dispatchEvent(event);
         console.log('cancelled, ', canceled);
       }
-      setTimeout(simulateMouseover, 2000);
+      setTimeout(simulateMouseover, 3000);
     }
   });
 
