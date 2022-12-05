@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createTrip } from '../store/reducers/trip';
+import Navbar from './Navbar';
 
 const CreateTripForm = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,8 @@ const CreateTripForm = () => {
   }
 
   return (
+    <div>
+    <Navbar />
     <form onSubmit={handleSubmit}>
       <h2>Save Your Trip</h2>
       <label>
@@ -104,6 +107,7 @@ const CreateTripForm = () => {
       </label>
       <button onClick={handleSubmit}>Save</button>
     </form>
+    </div>
   );
 };
 
