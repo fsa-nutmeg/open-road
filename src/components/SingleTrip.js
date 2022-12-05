@@ -24,7 +24,7 @@ const SingleTrip = props => {
   const { coordinates, curveFactor, featured, likes, name, owner, id } = trip;
   return (
     <div>
-      <div className='map-container'>
+      <div className='flex justify-center'>
         <Map coordinates={trip.coordinates} />
       </div>
       <h1>TRIP INFO</h1>
