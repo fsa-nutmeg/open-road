@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
 import { Button } from "react-bootstrap";
+import Navbar from "./Navbar";
 
 const Home = () => {
   const { logOut, user } = useUserAuth();
@@ -16,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      
+      <Navbar />
       <div className="p-4 box mt-3 text-center">
         Hello Welcome <br />
       </div>
