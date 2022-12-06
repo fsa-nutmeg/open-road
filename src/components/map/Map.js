@@ -7,8 +7,7 @@ import toTheSunCoordinates from './testCoordinates.json';
 import { Navigate } from 'react-router-dom';
 
 //mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
-mapboxgl.accessToken =
-  'pk.eyJ1IjoibnV0bWVnczEiLCJhIjoiY2xiMmZhY2xqMDJjMTNucW5tYmtpaWh4aiJ9.4UxmcoCBZZsklvvu8sDQ8A';
+mapboxgl.accessToken = 'baked_potato';
 
 export default function Map(props) {
   const mapContainer = useRef(null);
