@@ -39,7 +39,7 @@ export default function Map(props) {
       controls: { instructions: true },
       flyTo: true,
     });
-
+    console.log('mapboxDirections......', mapboxDirections);
     map.current.addControl(mapboxDirections, 'top-left');
 
     setMBDirections(mapboxDirections);
