@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
-import { Navigate } from "react-router-dom";
-=======
 import { Navigate, useNavigate } from "react-router-dom";
->>>>>>> dc56c75d49baa1ac4a248e1ddd594dbc40ea0622
 import { fetchAllTrips } from "../store/reducers/allTrips";
 import Navbar from "./Navbar";
 
@@ -16,29 +12,15 @@ const AllTrips = () => {
   const { allTrips } = useSelector((state) => state.allTrips);
   const [redirect, redirectTo] = useState(false);
 
-<<<<<<< HEAD
-  const handleClick = (e) => {
-    console.log(e.target.id);
-    redirectTo(e.target.id);
-  };
-=======
   // const handleClick = (e) => {
   //   redirectTo(e.target.id);
   // };
->>>>>>> dc56c75d49baa1ac4a248e1ddd594dbc40ea0622
 
   if (!allTrips.length) return <div>Loading Trips...</div>;
   if (redirect) return <Navigate to={`/trips/${redirect}`} />;
   return (
     <div>
       <Navbar />
-<<<<<<< HEAD
-      {allTrips.map((trip) => (
-        <div key={trip.id} onClick={handleClick} id={trip.id}>
-          {trip.name}
-        </div>
-      ))}
-=======
       <div className="p-10 grid grid-cols-2 gap-20">
         {allTrips.map((trip) => (
           <div
@@ -89,7 +71,6 @@ const AllTrips = () => {
           </div>
         ))}
       </div>
->>>>>>> dc56c75d49baa1ac4a248e1ddd594dbc40ea0622
     </div>
   );
 };
