@@ -57,7 +57,7 @@ export default function Map(props) {
       'top-left'
     );
     //terrain
-
+      /*
     map.current.on('load', () => {
       map.current.addSource('mapbox-dem', {
         type: 'raster-dem',
@@ -76,7 +76,7 @@ export default function Map(props) {
         },
       });
     });
-
+*/
     //route a trip
   });
 
