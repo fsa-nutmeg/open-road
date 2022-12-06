@@ -19,6 +19,7 @@ const Home = () => {
     <>
       <Navbar />
       <img src="https://www.mensjournal.com/wp-content/uploads/2018/07/Americas.jpg?quality=86&strip=all" />
+
       <div className="p-4 box mt-3 text-center">
         Hello Welcome <br />
       </div>
