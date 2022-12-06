@@ -23,7 +23,7 @@ export default function Map(props) {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/nutmegs1/clb2fo0ua000a14mj5t28j8c3',
+      style: 'mapbox://styles/mapbox/streets-v12',
       center: [lng, lat],
       zoom: zoom,
       pitch: 60,
@@ -57,7 +57,7 @@ export default function Map(props) {
       'top-left'
     );
     //terrain
-      /*
+    /*
     map.current.on('load', () => {
       map.current.addSource('mapbox-dem', {
         type: 'raster-dem',
