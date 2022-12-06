@@ -29,6 +29,8 @@ export default function Map(props) {
       pitch: 60,
     });
 
+    console.log('map.current', map.current);
+
     const mapboxDirections = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       profile: 'mapbox/driving',
@@ -192,17 +194,3 @@ export default function Map(props) {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
