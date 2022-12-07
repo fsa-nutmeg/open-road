@@ -31,8 +31,8 @@ function App() {
   return (
     <UserAuthContextProvider>
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/user" element={<SingleUser />} />
         <Route path="/map" element={<MapPage />} />
