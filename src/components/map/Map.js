@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 
 mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
-export default function Map() {
+export default function Map(props) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-113.9);
@@ -16,6 +16,7 @@ export default function Map() {
   const [zoom, setZoom] = useState(9);
   const [mBDirections, setMBDirections] = useState(null);
   const [redirect, updateRedirect] = useState(false);
+  const [routeDrawn, drawLine] = useState(false);
   let mapboxDirections = null;
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Map() {
       zoom: zoom,
       pitch: 60,
     });
+
     const mapboxDirections = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       profile: 'mapbox/driving',
@@ -35,17 +37,9 @@ export default function Map() {
       controls: { instructions: true },
       flyTo: true,
     });
+
     map.current.addControl(mapboxDirections, 'top-left');
-    mapboxDirections.on('origin', test => {
-      //console.log('map origin: ');
-      //console.log('origin test: ', test);
-      //console.log(mapboxDirections.getOrigin());
-    });
-    mapboxDirections.on('destination', test => {
-      //console.log('map destination: ');
-      //console.log('dest test: ', test);
-      //console.log(mapboxDirections.getDestination());
-    });
+
     setMBDirections(mapboxDirections);
     //current location
     map.current.addControl(
@@ -61,6 +55,7 @@ export default function Map() {
       'top-left'
     );
     //terrain
+
     map.current.on('load', () => {
       map.current.addSource('mapbox-dem', {
         type: 'raster-dem',
@@ -79,35 +74,67 @@ export default function Map() {
         },
       });
     });
-    console.log('map.current.on({route})', map.current.on('route'));
 
     //route a trip
-    map.current.on('load', () => {
-      map.current.addSource('route', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates: toTheSunCoordinates,
-          },
-        },
-      });
-      map.current.addLayer({
-        id: 'route',
-        type: 'line',
-        source: 'route',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round',
-        },
-        paint: {
-          'line-color': '#000000',
-          'line-width': 8,
-        },
-      });
-    });
+  });
+
+  useEffect(() => {
+    if (!routeDrawn && mBDirections !== null && props.coordinates) {
+      console.log('drawing route line');
+      const { coordinates } = props;
+
+      // map.current.on('load', () => {
+      //   map.current.addSource('route', {
+      //     type: 'geojson',
+      //     data: {
+      //       type: 'Feature',
+      //       properties: {},
+      //       geometry: {
+      //         type: 'LineString',
+      //         coordinates: coordinates,
+      //       },
+      //     },
+      //   });
+      //   map.current.addLayer({
+      //     id: 'route',
+      //     type: 'line',
+      //     source: 'route',
+      //     layout: {
+      //       'line-join': 'round',
+      //       'line-cap': 'round',
+      //     },
+      //     paint: {
+      //       'line-color': '#000000',
+      //       'line-width': 8,
+      //     },
+      //   });
+      // });
+
+      mBDirections.setOrigin(coordinates[0]);
+
+      mBDirections.setDestination(coordinates[coordinates.length - 1]);
+
+      for (let i = 1; i < coordinates.length - 1; i += 1) {
+        mBDirections.setWaypoint(i - 1, coordinates[i]);
+      }
+
+      setMBDirections(mBDirections);
+      drawLine(true);
+      // simulate mouse hover to render route line
+      function simulateMouseover() {
+        var event = new MouseEvent('mouseover', {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+        });
+        var myTarget = document.getElementsByClassName(
+          'mapbox-directions-step'
+        )[0];
+        var canceled = !myTarget.dispatchEvent(event);
+        console.log('cancelled, ', canceled);
+      }
+      setTimeout(simulateMouseover, 3000);
+    }
   });
 
   useEffect(() => {
@@ -165,3 +192,17 @@ export default function Map() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
