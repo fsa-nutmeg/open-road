@@ -5,7 +5,6 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { UserAuthContextProvider } from "./context/userAuthContext";
 import MapPage from "./components/MapPage";
-import StoreAdmin from "./StoreAdmin";
 import NewsPage from "./components/NewsPage";
 import CreateTripForm from "./components/CreateTripForm";
 import SingleTrip from "./components/SingleTrip";
@@ -37,7 +36,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/user" element={<SingleUser />} />
         <Route path="/map" element={<MapPage />} />
-        <Route path="/admin/*" element={<StoreAdmin />} />
         <Route path="/news" element={<NewsPage />} />
         <Route exact path="/trips" element={<AllTrips />} />
         <Route path="/trips/:tripId" element={<SingleTrip />} />
