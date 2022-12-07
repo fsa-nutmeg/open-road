@@ -10,6 +10,7 @@ import NewsPage from "./components/NewsPage";
 import CreateTripForm from "./components/CreateTripForm";
 import SingleTrip from "./components/SingleTrip";
 import AllTrips from "./components/AllTrips";
+import SingleUser from "./components/SingleUser";
 //import { useDispatch, useSelector } from 'react-redux';
 //import { fetchAllUsers } from './store/reducers/allUsers';
 //import { useEffect } from 'react';
@@ -34,6 +35,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/user" element={<SingleUser />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/admin/*" element={<StoreAdmin />} />
         <Route path="/news" element={<NewsPage />} />

@@ -1,9 +1,9 @@
+import React from 'react'
+import Navbar from './Navbar'
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
-import { Button } from "react-bootstrap";
-import Navbar from "./Navbar";
 
-const Home = () => {
+const SingleUser = () => {
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -16,11 +16,14 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div>
       <Navbar />
-      <img src="https://www.mensjournal.com/wp-content/uploads/2018/07/Americas.jpg?quality=86&strip=all" />
-    </>
-  );
-};
+      SingleUser
+      <button className='text-red-800' onClick={handleLogout}>
+          Log out
+        </button>
+      </div>
+  )
+}
 
-export default Home;
+export default SingleUser
