@@ -1,5 +1,5 @@
 {
-  "name": "react18-firebasev9-auth",
+  "name": "Open Road",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,7 +22,6 @@
     "bootstrap": "^5.1.3",
     "firebase": "^9.14.0",
     "fs": "^0.0.1-security",
-    "fsevents": "^2.2.2",
     "mapbox-gl": "^2.11.0",
     "ra-data-json-server": "^4.5.2",
     "react": "^18.0.0",
@@ -57,7 +56,10 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not ie 11",
+      "not chrome <51",
+      "not safari < 10",
+      "not android <51"
     ],
     "development": [
       "last 1 chrome version",

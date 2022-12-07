@@ -14,9 +14,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+//app.onAuth((authData) => {console.log(authData)})
+
 export const db = getDatabase(app);
 // Initialize services
 export const auth = getAuth(app);
-
+auth.onAuthStateChanged((authData) => {console.log('poop', authData)})
 
 export default app;

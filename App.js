@@ -5,11 +5,9 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { UserAuthContextProvider } from "./context/userAuthContext";
 import MapPage from "./components/MapPage";
-import NewsPage from "./components/NewsPage";
 import CreateTripForm from "./components/CreateTripForm";
 import SingleTrip from "./components/SingleTrip";
 import AllTrips from "./components/AllTrips";
-import SingleUser from "./components/SingleUser";
 //import { useDispatch, useSelector } from 'react-redux';
 //import { fetchAllUsers } from './store/reducers/allUsers';
 //import { useEffect } from 'react';
@@ -31,12 +29,10 @@ function App() {
   return (
     <UserAuthContextProvider>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/user" element={<SingleUser />} />
         <Route path="/map" element={<MapPage />} />
-        <Route path="/news" element={<NewsPage />} />
         <Route exact path="/trips" element={<AllTrips />} />
         <Route path="/trips/:tripId" element={<SingleTrip />} />
         <Route path="/createTripForm" element={<CreateTripForm />} />
