@@ -18,7 +18,6 @@ const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
 // Initialize services
 export const auth = getAuth(app);
-// auth.onAuthStateChanged((authData) => {checkUser(authData.uid, authData.email)})
 
 
 

@@ -8,10 +8,7 @@ import { createNewUser } from '../store/reducers/allUsers';
 const SingleUser = () => {
   const { user } = useSelector(state => state.user);
   const { logOut } = useUserAuth();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-   dispatch(createNewUser('-dkfjghs7777','fake@email.com'));
-   console.log()
   const handleLogout = async () => {
     try {
       await logOut();
@@ -21,7 +18,7 @@ const SingleUser = () => {
     }
   };
 if(user === null){
-  return (<div>user is nullll</div>)
+  return (<div>user is null</div>)
 }
   return (
     <div>
