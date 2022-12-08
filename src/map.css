@@ -5,7 +5,8 @@ container {
 
 .map-container {
   display: flex;
-  height: 70vw;
+
+  height: 80vw;
   width: 90vw;
 }
 
