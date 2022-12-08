@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { db } from '../../firebase-config';
-import { ref, child, get } from 'firebase/database';
+import { ref, child, get, update, push, set } from 'firebase/database';
 
 const dbRef = ref(db);
 
@@ -12,16 +12,37 @@ const slice = createSlice({
   },
   reducers: {
     getAllUsers: (state, action) => {
-      if (JSON.stringify(state.allUsers) != JSON.stringify(action.payload))
+      if (JSON.stringify(state.allUsers) !== JSON.stringify(action.payload))
       state.allUsers = action.payload;
       },
+    createUser: (state, action) => {
+      state.allUsers = [...state.allUsers, action.payload];
+
+    }
   },
 });
-
+//TODO make create user and check if user exists thunk
 export default slice.reducer;
 
 // ACTIONS
 const { getAllUsers } = slice.actions;
+const { createUser } = slice.actions;
+
+export const createNewUser = (UID, identifier) => async dispatch => {
+  try {
+//const newUserKey = push(child(ref(db), 'users')).key
+const updates = {}
+const user = {}
+user.mileage = 0;
+user.identifier = identifier;
+user.admin = false;
+updates['/users/'+ UID] = user;
+await update(ref(db), updates)
+dispatch(createUser(user));
+  } catch (err) {
+    return console.log(err)
+  }
+}
 
 export const fetchAllUsers = () => async dispatch => {
   try {
