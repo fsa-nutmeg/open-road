@@ -9,7 +9,9 @@ import CreateTripForm from "./components/CreateTripForm";
 import SingleTrip from "./components/SingleTrip";
 import AllTrips from "./components/AllTrips";
 import SingleUser from "./components/SingleUser";
-//import { useDispatch, useSelector } from 'react-redux';
+import { checkUser } from "./store/reducers/user";
+import { auth } from "./firebase-config";
+import { useDispatch, useSelector } from 'react-redux';
 //import { fetchAllUsers } from './store/reducers/allUsers';
 //import { useEffect } from 'react';
 
@@ -26,7 +28,8 @@ function App() {
     dispatch(fetchAllUsers());
     console.log(allUsers);
   });*/
-
+  const dispatch = useDispatch();
+  auth.onAuthStateChanged((authData) => {dispatch(checkUser(authData.uid, authData.email))})
   return (
     <UserAuthContextProvider>
       <Routes>

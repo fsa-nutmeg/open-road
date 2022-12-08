@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { db } from '../../firebase-config';
 import { ref, child, get, update, push, set } from 'firebase/database';
-
+import { fetchUser } from './user';
 const dbRef = ref(db);
 
 // SLICE
@@ -39,6 +39,7 @@ user.admin = false;
 updates['/users/'+ UID] = user;
 await update(ref(db), updates)
 dispatch(createUser(user));
+dispatch(fetchUser(UID));
   } catch (err) {
     return console.log(err)
   }

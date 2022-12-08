@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { db } from '../../firebase-config';
 import { ref, child, get } from 'firebase/database';
-
+import { createNewUser } from './allUsers';
 const dbRef = ref(db);
 
 // Slice
@@ -22,6 +22,7 @@ export default slice.reducer;
 
 // Actions
 const { getUser } = slice.actions;
+const { validateUser } = slice.actions;
 
 export const fetchUser = userId => async dispatch => {
   try {
@@ -37,3 +38,18 @@ export const fetchUser = userId => async dispatch => {
     return console.log(err);
   }
 };
+
+export const checkUser = (UID, identifier) => async dispatch => {
+  try {
+    const snapshot = await get(child(dbRef, `/users/${UID}`));
+    if (snapshot.exists()) {
+      const user = snapshot.val();
+      user.id = UID;
+      dispatch(getUser(user));
+    } else {
+      dispatch(createNewUser(UID, identifier))
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
