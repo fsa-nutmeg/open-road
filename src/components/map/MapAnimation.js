@@ -1,10 +1,9 @@
 import "mapbox-gl/dist/mapbox-gl.css";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import mapboxgl from "mapbox-gl";
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "../../map.css";
 import toTheSunCoordinates from "./testCoordinates.json";
 import { lineDistance, lineString, along } from "@turf/turf";
+import "../../map.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnV0bWVnczEiLCJhIjoiY2xiMmZhY2xqMDJjMTNucW5tYmtpaWh4aiJ9.4UxmcoCBZZsklvvu8sDQ8A";
@@ -135,7 +134,11 @@ const MapAnimation = () => {
     codeToAnimate();
   });
 
-  return <div id="map"></div>;
+  return (
+    <div className="animation-container">
+      <div id="map" />
+    </div>
+  );
 };
 
 export default MapAnimation;

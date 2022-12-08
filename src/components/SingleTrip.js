@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Map from "./map/Map";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchTrip } from "../store/reducers/trip";
 import Navbar from "./Navbar";
+import MapAnimation from "./map/MapAnimation";
 
 const SingleTrip = (props) => {
   const dispatch = useDispatch();
@@ -22,12 +23,16 @@ const SingleTrip = (props) => {
     return <div>Loading Trip...</div>;
   }
 
-  const { coordinates, curveFactor, featured, likes, name, owner, id } = trip;
+  const { coordinates, curveFactor, likes, name, owner } = trip;
   return (
     <div>
       <Navbar />
+
       <div className="flex justify-center">
-        <Map coordinates={trip.coordinates} />
+        <div className="parent">
+          <Map coordinates={trip.coordinates} />
+          <MapAnimation coordinates={trip.coordinates} />
+        </div>
       </div>
       <div className="overflow-hidden bg-white shadow sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6">
@@ -79,10 +84,7 @@ const SingleTrip = (props) => {
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Coordinates</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                <ul
-                  role="list"
-                  className="divide-y divide-gray-200 rounded-md border border-gray-200"
-                >
+                <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
                   <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                     <div className="flex w-0 flex-1 items-center">
                       {coordinates.map((tuple) => (
