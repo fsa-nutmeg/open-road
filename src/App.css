@@ -32,5 +32,27 @@
 }
 
 .main {
-  background-color: black;
+  background-color: #1f2937;
+}
+
+.background {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  font-size: 80px;
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: fit-content;
+  margin: auto;
+  border-style: "solid";
+  text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000,
+    -1px -1px #000, 1px -1px #000, -1px 1px #000;
 }
