@@ -36,6 +36,7 @@ export default function Map(props) {
       geometries: 'geojson',
       controls: { instructions: true },
       flyTo: true,
+      exclude: 'motorway',
     });
 
     map.current.addControl(mapboxDirections, 'top-left');
@@ -189,22 +190,13 @@ export default function Map(props) {
     <div className='flex flex-col align-items-center justify-center'>
       <div ref={mapContainer} className='map-container' />
       <div className='flex'>
-      <button className='bg-gray-800 hover:bg-gray-700 text-white font-bold pt-3 pb-3 pl-10 pr-10 rounded-full'  onClick={e => handleClick(e)}>Save Trip</button>
+        <button
+          className='bg-gray-800 hover:bg-gray-700 text-white font-bold pt-3 pb-3 pl-10 pr-10 rounded-full'
+          onClick={e => handleClick(e)}
+        >
+          Save Trip
+        </button>
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
