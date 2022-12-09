@@ -19,7 +19,7 @@ package-lock.json
 .env.test.local
 .env.production.local
 .env
-/bin/secrets.js
+/scripts/secrets.js
 package-lock.json
 yarn.lock
 

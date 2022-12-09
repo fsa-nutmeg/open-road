@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import "../../map.css";
-import toTheSunCoordinates from "./testCoordinates.json";
 import { Navigate } from "react-router-dom";
 
 mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
