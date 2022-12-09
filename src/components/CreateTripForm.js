@@ -56,59 +56,76 @@ const CreateTripForm = () => {
   return (
     <div>
       <Navbar />
-      <form onSubmit={handleSubmit}>
-        <h2>Save Your Trip</h2>
-        <label>
-          {"Trip Name: "}
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </label>
+      <form className="login">
+        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <h2>Save Your Trip</h2>
+          <div className="form-group col-md-6">
+            <label for="name">Name of Trip</label>
+            <input
+              type="text"
+              style={{ width: "48vw" }}
+              className="form-control"
+              name="name"
+              placeholder={formData.name}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <h3>Trip Origin</h3>
+
+          <div className="form-group col-md-6">
+            <label for="originLat">Lattitude</label>
+            <input
+              type="text"
+              className="form-control"
+              name="originLat"
+              placeholder={formData.originLat}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group col-md-6">
+            <label for="originLong">Longitude</label>
+            <input
+              type="password"
+              className="form-control"
+              name="originLong"
+              placeholder={formData.originLong}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          {/* <div class="form-row"> */}
+          <h3>Trip Destination</h3>
+          <div class="form-group col-md-6">
+            <label for="destLat">Lattitude</label>
+            <input
+              type="text"
+              className="form-control"
+              name="destLat"
+              placeholder={formData.originLat}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group col-md-6">
+            <label for="destLong">Longitude</label>
+            <input
+              type="text"
+              className="form-control"
+              name="destLong"
+              placeholder={formData.originLong}
+              onChange={handleChange}
+            />
+            {/* </div> */}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" onClick={handleSubmit}>
+          Submit
+        </button>
       </form>
-      <div>
-        <h3>Trip Origin</h3>
-        <label>
-          {"Lattitude: "}
-          <input
-            type="text"
-            name="originLat"
-            value={formData.originLat}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          {"Longitude: "}
-          <input
-            type="text"
-            name="originLong"
-            value={formData.originLong}
-            onChange={handleChange}
-          />
-        </label>
-        <h3>Trip Distination</h3>
-        <label>
-          {"Lattitude: "}
-          <input
-            type="text"
-            name="destLat"
-            value={formData.destLat}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          {"Longitude: "}
-          <input
-            type="text"
-            name="destLong"
-            value={formData.destLong}
-            onChange={handleChange}
-          />
-        </label>
-        <button onClick={handleSubmit}>Save</button>
-      </div>
     </div>
   );
 };

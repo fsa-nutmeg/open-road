@@ -1,14 +1,13 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import React, { useEffect } from "react";
 import mapboxgl from "mapbox-gl";
-import toTheSunCoordinates from "./testCoordinates.json";
 import { lineDistance, lineString, along } from "@turf/turf";
 import "../../map.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibnV0bWVnczEiLCJhIjoiY2xiMmZhY2xqMDJjMTNucW5tYmtpaWh4aiJ9.4UxmcoCBZZsklvvu8sDQ8A";
 
-function codeToAnimate() {
+function codeToAnimate(props) {
   const map = new mapboxgl.Map({
     container: "map",
     zoom: 11.53,
@@ -29,12 +28,14 @@ function codeToAnimate() {
   //   ...
   // ]
   // this is the path the camera will look at
-  const targetRoute = toTheSunCoordinates;
+  const targetRoute = props.coordinates;
+  console.log("targetRoute", targetRoute);
   // this is the path the camera will move along
-  const cameraRoute = toTheSunCoordinates;
+  const cameraRoute = props.coordinates.map(([x, y]) => [x, y - 0.1]);
+  console.log("cameraRoute", cameraRoute);
 
   // add terrain, sky, and line layers once the style has loaded
-  map.on("load", () => {
+  map.on("load", (props) => {
     map.addSource("mapbox-dem", {
       type: "raster-dem",
       url: "mapbox://mapbox.mapbox-terrain-dem-v1",
@@ -49,7 +50,7 @@ function codeToAnimate() {
         properties: {},
         geometry: {
           type: "LineString",
-          coordinates: toTheSunCoordinates,
+          coordinates: props.coordinates,
         },
       },
     });
@@ -71,7 +72,7 @@ function codeToAnimate() {
   // wait for the terrain and sky to load before starting animation
   map.on("load", () => {
     const animationDuration = 80000;
-    const cameraAltitude = 4000;
+    const cameraAltitude = 2000;
     // get the overall distance of each route so we can interpolate along them
     const routeDistance = lineDistance(lineString(targetRoute));
     const cameraRouteDistance = lineDistance(lineString(cameraRoute));
@@ -129,9 +130,9 @@ function codeToAnimate() {
   });
 }
 
-const MapAnimation = () => {
+const MapAnimation = (props) => {
   useEffect(() => {
-    codeToAnimate();
+    codeToAnimate(props);
   });
 
   return (
