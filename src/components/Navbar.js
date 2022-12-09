@@ -29,11 +29,11 @@ const Navbar = () => {
           <NavLink className="text-md font-medium no-underline text-white" to="/login">Login</NavLink>}
         </div>
 
-        <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400"></div>
-      </div>
+          <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400"></div>
+        </div>
       </NavLink>
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
