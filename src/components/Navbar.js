@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import user from '../store/reducers/user'
 import { useSelector } from 'react-redux'
+//import logo from '../../public/PngItem_6490124.png'
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
@@ -29,7 +30,9 @@ const Navbar = () => {
           <NavLink className="text-md font-medium no-underline text-white" to="/login">Login</NavLink>}
         </div>
 
-          <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400"></div>
+          <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400">
+            <img alt='d'src= './PngItem_6490124.png'/>
+          </div>
         </div>
       </NavLink>
     </header>
