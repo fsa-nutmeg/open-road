@@ -27,42 +27,42 @@ const SingleUser = () => {
         <div className="content-center w-2/3">
           <div className="content-center items-center overflow-hidden bg-white shadow sm:rounded-lg">
             <div className="px-4 py-5 sm:px-6">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Trip Information
-              </h3>
-              <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              <h2 className="text-lg font-lg leading-6 text-gray-900 content-center items-center justify-center flex-row flex">
+                {user.identifier}
+              </h2>
+              {/* <p className="mt-1 max-w-2xl text-sm text-gray-500">
                 Personal details and application.
-              </p>
+              </p> */}
             </div>
             <div className="border-t border-gray-200">
               <dl>
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Name</dt>
+                  <dt className="text-sm font-medium text-gray-500">Badges</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {/* {name} */}
+                    {user.badges}
                   </dd>
                 </div>
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Owner</dt>
+                  <dt className="text-sm font-medium text-gray-500">Mileage</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {/* {owner} */}
+                    {user.mileage}
                   </dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Likes</dt>
+                  <dt className="text-sm font-medium text-gray-500">Saved Trips</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {/* {likes} */}
+                    {user.savedTrips}
                   </dd>
                 </div>
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+               {/*} <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">
                     Curve Factor
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {/* {curveFactor} */}
+                     {curveFactor}
                   </dd>
-                </div>
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                </div> */}
+                {/* <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">About</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                     Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
@@ -71,10 +71,10 @@ const SingleUser = () => {
                     in ea officia proident. Irure nostrud pariatur mollit ad
                     adipisicing reprehenderit deserunt qui eu.
                   </dd>
-                </div>
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                </div> */}
+                {/* <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">
-                    Coordinates
+                    Trips
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                     <ul
@@ -86,20 +86,20 @@ const SingleUser = () => {
                       </li>
                     </ul>
                   </dd>
-                </div>
+                </div> */}
               </dl>
             </div>
           </div>
           {/* <div className="bg-white">
         {user.id}
-        {user.identifier}
-        <button className="text-red-800" onClick={handleLogout}>
+        {user.identifier} */}
+        {/* <button className="text-red-800" onClick={handleLogout}>
           Log out
-        </button>
-      </div> */}
+        </button> */}
+      </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 

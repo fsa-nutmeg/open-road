@@ -1,9 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import user from '../store/reducers/user'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
+  const { user } = useSelector((state) => state.user);
   return (
-    <header className="h-16 w-full flex items-center relative justify-end px-5 space-x-10 bg-gray-800">
+    <header className="h-16 w-full flex items-center relative justify-end px-5 space-x-10 bg-gray-800 border-b-2 border-gray-700">
       <div className='flex items-center space-x-7 pr-4'>
         <NavLink className="bg-slate-800 rounded-md no-underline"to="/">
           <h4 className='text-white text-sm pl-2 pr-2 pt-1'>Home</h4>
@@ -22,9 +25,8 @@ const Navbar = () => {
       <div className="flex flex-shrink-0 items-center space-x-4 text-white">
 
         <div className="flex flex-col items-end ">
-          <div className="text-md font-medium ">User Name</div>
-
-          <div className="text-sm font-regular">Account Badge Title</div>
+          {user ? <div className="text-md font-medium ">{user.identifier}</div> :
+          <NavLink className="text-md font-medium no-underline text-white" to="/login">Login</NavLink>}
         </div>
 
         <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400"></div>
