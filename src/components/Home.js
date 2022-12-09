@@ -25,13 +25,8 @@ const Home = () => {
       />
 
       <div style={styles.title} className="header">
-        <img
-          style={styles.title}
-          src="./pics/OpenRoadLogo.png"
-          alt="Open Road"
-          className="logo2"
-        />
-        <p className="logoText"> PEN ROAD</p>
+        <img src="./pics/OpenRoadLogo.png" alt="Open Road" className="logo2" />
+        <p className="text-10xl">PEN ROAD</p>
       </div>
     </>
   );
@@ -49,7 +44,7 @@ const styles = {
   },
   title: {
     textAlign: "center",
-    fontSize: 100,
+    fontSize: 90,
     color: "#fff",
     fontFamily: "Lato, sans-serif",
     fontWeight: "bold",
