@@ -4,8 +4,7 @@ import mapboxgl from "mapbox-gl";
 import { lineDistance, lineString, along } from "@turf/turf";
 import "../../map.css";
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoibnV0bWVnczEiLCJhIjoiY2xiMmZhY2xqMDJjMTNucW5tYmtpaWh4aiJ9.4UxmcoCBZZsklvvu8sDQ8A";
+mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
 function codeToAnimate(props) {
   const map = new mapboxgl.Map({
