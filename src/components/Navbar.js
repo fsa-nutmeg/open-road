@@ -41,7 +41,9 @@ const Navbar = () => {
             )}
           </div>
 
-          <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400"></div>
+          <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400">
+            <img alt='d'src= './PngItem_6490124.png'/>
+          </div>
         </div>
       </NavLink>
     </header>
