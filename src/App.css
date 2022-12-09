@@ -53,6 +53,24 @@
   height: fit-content;
   margin: auto;
   border-style: "solid";
-  text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000,
-    -1px -1px #000, 1px -1px #000, -1px 1px #000;
+}
+
+.logo {
+  position: absolute;
+  left: 10px;
+  height: 60px;
+  width: 70px;
+}
+
+.logo2 {
+  height: 120px;
+}
+
+/* .logoText {
+  position: absolute;
+  left: 405px;
+} */
+
+.Paragraph {
+  margin: 100px;
 }

@@ -23,8 +23,15 @@ const Home = () => {
         src="https://www.mensjournal.com/wp-content/uploads/2018/07/Americas.jpg?quality=86&strip=all"
         alt="Open Road"
       />
+
       <div style={styles.title} className="header">
-        <p>OPEN ROAD</p>
+        <img
+          style={styles.title}
+          src="./pics/OpenRoadLogo.png"
+          alt="Open Road"
+          className="logo2"
+        />
+        <p className="logoText"> PEN ROAD</p>
       </div>
     </>
   );

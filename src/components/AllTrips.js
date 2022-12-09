@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { fetchAllTrips } from "../store/reducers/allTrips";
@@ -10,7 +10,7 @@ const AllTrips = () => {
   const navigate = useNavigate();
 
   const { allTrips } = useSelector((state) => state.allTrips);
-  const [redirect, redirectTo] = useState(false);
+  const [redirect] = useState(false);
 
   // const handleClick = (e) => {
   //   redirectTo(e.target.id);

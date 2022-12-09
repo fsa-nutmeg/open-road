@@ -8,13 +8,40 @@ container {
 
   height: 80vw;
   width: 90vw;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
+.mapboxgl-map {
+  -webkit-tap-highlight-color: rgb(0 0 0/0);
+  font: 12px/20px Helvetica Neue, Arial, Helvetica, sans-serif;
+  overflow: visible;
+  position: relative;
+}
+/* 
 .page-container {
   display: flex;
   height: 100vh;
 
   flex-direction: column;
+} */
+
+.parent {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.animation-container {
+  height: 25vw;
+  width: 25vw;
+  display: flex;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  /* border: 1px solid #000000; */
+  z-index: 1;
 }
 
 .sidebar {
