@@ -11,10 +11,10 @@ function codeToAnimate(props) {
     container: "map",
     zoom: 11.53,
     center: [6.5615, 46.0598],
-    pitch: 65,
+    pitch: 35,
     bearing: -180,
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: "mapbox://styles/mapbox/outdoors-v12",
+    style: "mapbox://styles/mapbox/satellite-v9",
     interactive: false,
   });
 
@@ -70,8 +70,8 @@ function codeToAnimate(props) {
 
   // wait for the terrain and sky to load before starting animation
   map.on("load", () => {
-    const animationDuration = 80000;
-    const cameraAltitude = 2000;
+    const animationDuration = 120000;
+    const cameraAltitude = 5000;
     // get the overall distance of each route so we can interpolate along them
     const routeDistance = lineDistance(lineString(targetRoute));
     const cameraRouteDistance = lineDistance(lineString(cameraRoute));
