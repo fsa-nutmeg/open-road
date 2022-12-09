@@ -1,10 +1,10 @@
-import 'mapbox-gl/dist/mapbox-gl.css';
-import React, { useRef, useEffect, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
-import '../../map.css';
-import toTheSunCoordinates from './testCoordinates.json';
-import { Navigate } from 'react-router-dom';
+import "mapbox-gl/dist/mapbox-gl.css";
+import React, { useRef, useEffect, useState } from "react";
+import mapboxgl from "mapbox-gl";
+import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
+import "../../map.css";
+import toTheSunCoordinates from "./testCoordinates.json";
+import { Navigate } from "react-router-dom";
 
 mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
@@ -23,7 +23,7 @@ export default function Map(props) {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/nutmegs1/clb2fo0ua000a14mj5t28j8c3',
+      style: "mapbox://styles/nutmegs1/clb2fo0ua000a14mj5t28j8c3",
       center: [lng, lat],
       zoom: zoom,
       pitch: 60,
@@ -31,14 +31,15 @@ export default function Map(props) {
 
     const mapboxDirections = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
-      profile: 'mapbox/driving',
+      profile: "mapbox/driving",
       alternatives: false,
-      geometries: 'geojson',
+      geometries: "geojson",
       controls: { instructions: true },
       flyTo: true,
+      exclude: "motorway",
     });
 
-    map.current.addControl(mapboxDirections, 'top-left');
+    map.current.addControl(mapboxDirections, "top-left");
 
     setMBDirections(mapboxDirections);
     //current location
@@ -52,25 +53,25 @@ export default function Map(props) {
         // Draw an arrow next to the location dot to indicate which direction the device is heading.
         showUserHeading: true,
       }),
-      'top-left'
+      "top-left"
     );
     //terrain
 
-    map.current.on('load', () => {
-      map.current.addSource('mapbox-dem', {
-        type: 'raster-dem',
-        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+    map.current.on("load", () => {
+      map.current.addSource("mapbox-dem", {
+        type: "raster-dem",
+        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
         tileSize: 512,
         maxZoom: 16,
       });
-      map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 2.5 });
+      map.current.setTerrain({ source: "mapbox-dem", exaggeration: 2.5 });
       map.current.addLayer({
-        id: 'sky',
-        type: 'sky',
+        id: "sky",
+        type: "sky",
         paint: {
-          'sky-type': 'atmosphere',
-          'sky-atmosphere-sun': [0.0, 90.0],
-          'sky-atmosphere-sun-intensity': 15,
+          "sky-type": "atmosphere",
+          "sky-atmosphere-sun": [0.0, 90.0],
+          "sky-atmosphere-sun-intensity": 15,
         },
       });
     });
@@ -80,7 +81,7 @@ export default function Map(props) {
 
   useEffect(() => {
     if (!routeDrawn && mBDirections !== null && props.coordinates) {
-      console.log('drawing route line');
+      console.log("drawing route line");
       const { coordinates } = props;
 
       // map.current.on('load', () => {
@@ -122,16 +123,16 @@ export default function Map(props) {
       drawLine(true);
       // simulate mouse hover to render route line
       function simulateMouseover() {
-        var event = new MouseEvent('mouseover', {
+        var event = new MouseEvent("mouseover", {
           view: window,
           bubbles: true,
           cancelable: true,
         });
         var myTarget = document.getElementsByClassName(
-          'mapbox-directions-step'
+          "mapbox-directions-step"
         )[0];
         var canceled = !myTarget.dispatchEvent(event);
-        console.log('cancelled, ', canceled);
+        console.log("cancelled, ", canceled);
       }
       setTimeout(simulateMouseover, 3000);
     }
@@ -139,7 +140,7 @@ export default function Map(props) {
 
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
-    map.current.on('move', () => {
+    map.current.on("move", () => {
       setLng(map.current.getCenter().lng.toFixed(4));
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
@@ -169,7 +170,7 @@ export default function Map(props) {
     */
   });
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     e.preventDefault();
     if (mBDirections !== null) {
       const origin = mBDirections.getOrigin().geometry.coordinates;
@@ -177,34 +178,25 @@ export default function Map(props) {
 
       if (origin.length && dest.length) {
         // save origin and dest to local storage
-        localStorage.setItem('origin', JSON.stringify(origin));
-        localStorage.setItem('dest', JSON.stringify(dest));
+        localStorage.setItem("origin", JSON.stringify(origin));
+        localStorage.setItem("dest", JSON.stringify(dest));
         updateRedirect(true);
       }
     }
   };
 
-  if (redirect) return <Navigate to='/createTripForm' />;
+  if (redirect) return <Navigate to="/createTripForm" />;
   return (
-    <div className='flex flex-col align-items-center justify-center'>
-      <div ref={mapContainer} className='map-container' />
-      <div className='flex'>
-      <button className='bg-gray-800 hover:bg-gray-700 text-white font-bold pt-3 pb-3 pl-10 pr-10 rounded-full'  onClick={e => handleClick(e)}>Save Trip</button>
+    <div className="flex flex-col align-items-center justify-center">
+      <div ref={mapContainer} className="map-container" />
+      <div className="flex">
+        <button
+          className="bg-gray-800 hover:bg-gray-700 text-white font-bold pt-3 pb-3 pl-10 pr-10 rounded-full"
+          onClick={(e) => handleClick(e)}
+        >
+          Save Trip
+        </button>
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

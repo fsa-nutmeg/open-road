@@ -14,8 +14,10 @@ export default class ReactReveal extends Component {
         <div style={styles.block}>
           <Fragment left>
             <div>
-              <p style={styles.title2}>Welcome To</p>
-              <h1 style={styles.title}>OPEN ROAD</h1>
+              <p style={styles.title2}>
+                We Don't Take You Where You Need To Go
+              </p>
+              <h1 style={styles.title}>We Take You Where You Want To Go</h1>
             </div>
           </Fragment>
         </div>
