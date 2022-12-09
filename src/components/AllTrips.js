@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { fetchAllTrips } from "../store/reducers/allTrips";
-import Navbar from "./Navbar";
 
 const AllTrips = () => {
   const dispatch = useDispatch();
@@ -20,7 +19,6 @@ const AllTrips = () => {
   if (redirect) return <Navigate to={`/trips/${redirect}`} />;
   return (
     <div>
-      <Navbar />
       <div className="p-10 grid grid-cols-2 gap-20">
         {allTrips.map((trip) => (
           <div

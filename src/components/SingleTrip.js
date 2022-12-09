@@ -3,7 +3,6 @@ import Map from "./map/Map";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchTrip } from "../store/reducers/trip";
-import Navbar from "./Navbar";
 import MapAnimation from "./map/MapAnimation";
 
 const SingleTrip = (props) => {
@@ -26,8 +25,6 @@ const SingleTrip = (props) => {
   const { coordinates, curveFactor, likes, name, owner } = trip;
   return (
     <div>
-      <Navbar />
-
       <div className="flex justify-center">
         <div className="parent">
           <Map coordinates={trip.coordinates} />

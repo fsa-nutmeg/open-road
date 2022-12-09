@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +21,6 @@ const SingleUser = () => {
   }
   return (
     <div className="bg-gray-800">
-      <Navbar />
       <div className="flex flex-row justify-center items-center min-h-screen">
         <div className="content-center w-2/3">
           <div className="content-center items-center overflow-hidden bg-white shadow sm:rounded-lg">
@@ -49,12 +47,14 @@ const SingleUser = () => {
                   </dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Saved Trips</dt>
+                  <dt className="text-sm font-medium text-gray-500">
+                    Saved Trips
+                  </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                     {user.savedTrips}
                   </dd>
                 </div>
-               {/*} <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                {/*} <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">
                     Curve Factor
                   </dt>
@@ -93,12 +93,12 @@ const SingleUser = () => {
           {/* <div className="bg-white">
         {user.id}
         {user.identifier} */}
-        {/* <button className="text-red-800" onClick={handleLogout}>
+          {/* <button className="text-red-800" onClick={handleLogout}>
           Log out
         </button> */}
-      </div>
         </div>
       </div>
+    </div>
     // </div>
   );
 };
