@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
 import { Button } from "react-bootstrap";
 import Navbar from "./Navbar";
+import OpenRoadLogo from "../OpenRoadLogo.png";
 
 const Home = () => {
   const { logOut, user } = useUserAuth();
@@ -25,7 +26,7 @@ const Home = () => {
       />
 
       <div style={styles.title} className="header">
-        <img src="./pics/OpenRoadLogo.png" alt="Open Road" className="logo2" />
+        <img src={OpenRoadLogo} alt="Open Road" className="logo2" />
         <p className="text-10xl">PEN ROAD</p>
       </div>
     </>

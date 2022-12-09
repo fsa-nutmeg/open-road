@@ -2,16 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import user from "../store/reducers/user";
 import { useSelector } from "react-redux";
+import OpenRoadLogo from "../OpenRoadLogo.png";
+import DefaultUserPhoto from "../PngItem_6490124.png";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
   return (
     <header className="h-16 w-full flex items-center relative justify-end px-5 space-x-10 bg-gray-800">
-      <img
-        className="logo"
-        src="./pics/OpenRoadLogo.png"
-        alt="Open Road Logo"
-      />
+      <img className="logo" src={OpenRoadLogo} alt="Open Road Logo" />
       <div className="flex items-center space-x-7 pr-4">
         <NavLink className="bg-slate-800 rounded-md no-underline" to="/">
           <h4 className="text-white text-sm pl-2 pr-2 pt-1">Home</h4>
@@ -42,7 +40,7 @@ const Navbar = () => {
           </div>
 
           <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400">
-            <img alt='d'src= './PngItem_6490124.png'/>
+            <img alt="Default User Photo" src={DefaultUserPhoto} />
           </div>
         </div>
       </NavLink>
