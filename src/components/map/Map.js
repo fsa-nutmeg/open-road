@@ -35,6 +35,7 @@ export default function Map(props) {
       geometries: "geojson",
       controls: { instructions: true },
       flyTo: true,
+      exclude: "motorway",
     });
 
     map.current.addControl(mapboxDirections, "top-left");
