@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <header className="h-16 w-full flex items-center relative justify-end px-5 space-x-10 bg-gray-800">
       <div className='flex items-center space-x-7 pr-4'>
-        <NavLink className="bg-slate-800 rounded-md no-underline"to="/home">
+        <NavLink className="bg-slate-800 rounded-md no-underline"to="/">
           <h4 className='text-white text-sm pl-2 pr-2 pt-1'>Home</h4>
           </NavLink>
           <NavLink className="bg-slate-800 rounded-md no-underline"to="/map">
