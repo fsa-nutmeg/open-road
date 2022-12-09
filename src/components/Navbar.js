@@ -9,7 +9,9 @@ const Navbar = () => {
   const { user } = useSelector((state) => state.user);
   return (
     <header className="h-16 w-full flex items-center relative justify-end px-5 space-x-10 bg-gray-800">
-      <img className="logo" src={OpenRoadLogo} alt="Open Road Logo" />
+      <a className="logo" href="/">
+        <img src={OpenRoadLogo} alt="Open Road Logo" />
+      </a>
       <div className="flex items-center space-x-7 pr-4">
         <NavLink className="bg-slate-800 rounded-md no-underline" to="/">
           <h4 className="text-white text-sm pl-2 pr-2 pt-1">Home</h4>
