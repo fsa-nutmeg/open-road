@@ -70,23 +70,22 @@ const SingleUser = () => {
                         onClick={() => navigate(`../trips/${trip.id}`)}
                         id={trip.id}
                       >
-                        <div>
-                          <img
-                            src={trip.img_url || './pics/default.jpg'}
-                            alt='none found'
-                            className='w-full object-cover object-center rounded-lg shadow-md'
-                          />
-                          <div className='relative px-4 -mt-6  '>
-                            <div className='bg-white p-6 rounded-lg shadow-lg'>
-                              <div className='flex items-baseline'>
-                                <span className='bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide'>
-                                  label
-                                </span>
-                                <div className='ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider'>
-                                  {' '}
-                                  click me
-                                </div>
-                              </div>
+                    <div>
+                      <img
+                      src={trip.img_url || './pics/default.jpg'}
+                      alt='none found'
+                      className='w-full object-cover object-center rounded-lg shadow-md'
+                      />
+                      <div className="relative px-4 -mt-6  ">
+                        <div className="bg-white p-6 rounded-lg shadow-lg">
+                          <div className="flex items-baseline">
+                            <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
+                            {trip.featured === true ? 'Featured' : ''}
+                            </span>
+                            <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
+                            {" "}
+                            </div>
+                          </div>
 
                               <h4 className='mt-1 text-xl font-semibold uppercase leading-tight truncate'>
                                 {trip.name}
