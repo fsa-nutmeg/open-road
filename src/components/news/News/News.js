@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import NewsItem from "../NewsItem/NewsItem";
-import Spinner from "../Spinner/Spinner";
-import PropTypes from "prop-types";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Nullimage from "../Images/nullimage.png";
-import { Row, Col } from "react-bootstrap";
-import { Header, Container, card } from "./index";
-import { endpointPath } from "../config/api";
-import { header } from "../config/config";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import NewsItem from '../NewsItem/NewsItem';
+import Spinner from '../Spinner/Spinner';
+import PropTypes from 'prop-types';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Nullimage from '../Images/nullimage.png';
+import { Row, Col } from 'react-bootstrap';
+import { Header, Container, card } from './index';
+import { endpointPath } from '../config/api';
+import { header } from '../config/config';
 
 function News(props) {
   const [articles, setArticles] = useState([]);
@@ -16,11 +16,11 @@ function News(props) {
   const [loading, setLoading] = useState(true);
   const [totalResults, setTotalResults] = useState(0);
 
-  const capitaLize = (string) => {
+  const capitaLize = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  document.title = `${capitaLize(props.category)} - News App`;
+  // document.title = `${capitaLize(props.category)} - News App`;
 
   const updatenews = async () => {
     try {
@@ -67,7 +67,7 @@ function News(props) {
       >
         <Container>
           <Row>
-            {articles.map((element) => {
+            {articles.map(element => {
               return (
                 <Col
                   sm={12}
@@ -83,7 +83,7 @@ function News(props) {
                     author={element.author}
                     date={element.publishedAt}
                     channel={element.source.name}
-                    alt="Card image"
+                    alt='Card image'
                     publishedAt={element.publishedAt}
                     imageUrl={
                       element.urlToImage === null
@@ -103,9 +103,9 @@ function News(props) {
 }
 
 News.defaultProps = {
-  country: "us",
+  country: 'us',
   pageSize: 7,
-  category: "general",
+  category: 'general',
 };
 News.propTypes = {
   country: PropTypes.string,
