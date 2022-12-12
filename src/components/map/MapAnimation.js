@@ -30,7 +30,7 @@ function codeToAnimate(props) {
   const targetRoute = props.coordinates;
   console.log("targetRoute", targetRoute);
   // this is the path the camera will move along
-  const cameraRoute = props.coordinates.map(([x, y]) => [x, y - 0.1]);
+  const cameraRoute = props.coordinates.map(([x, y]) => [x, y - 160]);
   console.log("cameraRoute", cameraRoute);
 
   // add terrain, sky, and line layers once the style has loaded
@@ -39,7 +39,7 @@ function codeToAnimate(props) {
       type: "raster-dem",
       url: "mapbox://mapbox.mapbox-terrain-dem-v1",
       tileSize: 512,
-      maxzoom: 14,
+      maxzoom: 20,
     });
     map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
     map.addSource("trace", {
@@ -54,24 +54,33 @@ function codeToAnimate(props) {
       },
     });
     map.addLayer({
-      type: "line",
-      source: "trace",
-      id: "line",
+      id: "sky",
+      type: "sky",
       paint: {
-        "line-color": "black",
-        "line-width": 5,
-      },
-      layout: {
-        "line-cap": "round",
-        "line-join": "round",
+        "sky-type": "atmosphere",
+        "sky-atmosphere-sun": [0.0, 90.0],
+        "sky-atmosphere-sun-intensity": 15,
       },
     });
+    // map.addLayer({
+    //   type: "line",
+    //   source: "trace",
+    //   id: "line",
+    //   paint: {
+    //     "line-color": "black",
+    //     "line-width": 5,
+    //   },
+    //   layout: {
+    //     "line-cap": "round",
+    //     "line-join": "round",
+    //   },
+    // });
   });
 
   // wait for the terrain and sky to load before starting animation
   map.on("load", () => {
     const animationDuration = 120000;
-    const cameraAltitude = 5000;
+    const cameraAltitude = 2500;
     // get the overall distance of each route so we can interpolate along them
     const routeDistance = lineDistance(lineString(targetRoute));
     const cameraRouteDistance = lineDistance(lineString(cameraRoute));
@@ -104,6 +113,8 @@ function codeToAnimate(props) {
       ).geometry.coordinates;
 
       const camera = map.getFreeCameraOptions();
+
+      // console.log("alongCamera", alongCamera);
 
       // set the position and altitude of the camera
       camera.position = mapboxgl.MercatorCoordinate.fromLngLat(
