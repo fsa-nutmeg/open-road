@@ -23,13 +23,13 @@ const SingleTrip = props => {
     return <div>Loading Trip...</div>;
   }
 
-  const { coordinates, curveFactor, likes, name, owner } = trip;
+  const { coordinates, curveFactor, likes, name, owner, featured } = trip;
   return (
     <div>
       <div className='flex justify-center'>
         <div className='parent'>
           <Map coordinates={trip.coordinates} />
-          <MapAnimation coordinates={trip.coordinates} />
+          {featured ? <MapAnimation coordinates={trip.coordinates} /> : ''}
         </div>
       </div>
       <div className='overflow-hidden bg-white shadow sm:rounded-lg'>
