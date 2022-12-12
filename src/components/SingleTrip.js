@@ -27,7 +27,6 @@ const SingleTrip = (props) => {
   return (
     <div>
       <Navbar />
-
       <div className="flex justify-center">
         <div className="parent">
           <Map coordinates={trip.coordinates} />
@@ -84,7 +83,7 @@ const SingleTrip = (props) => {
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Coordinates</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
+                {/* <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
                   <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                     <div className="flex w-0 flex-1 items-center">
                       {coordinates.map((tuple) => (
@@ -92,7 +91,7 @@ const SingleTrip = (props) => {
                       ))}
                     </div>
                   </li>
-                </ul>
+                </ul> */}
               </dd>
             </div>
           </dl>
