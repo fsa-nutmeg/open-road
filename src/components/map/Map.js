@@ -10,9 +10,9 @@ mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 export default function Map(props) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-113.9);
-  const [lat, setLat] = useState(48.35);
-  const [zoom, setZoom] = useState(9);
+  const [lng, setLng] = useState(-97.5);
+  const [lat, setLat] = useState(34);
+  const [zoom, setZoom] = useState(4);
   const [mBDirections, setMBDirections] = useState(null);
   const [redirect, updateRedirect] = useState(false);
   const [routeDrawn, drawLine] = useState(false);
@@ -25,7 +25,7 @@ export default function Map(props) {
       style: "mapbox://styles/nutmegs1/clb2fo0ua000a14mj5t28j8c3",
       center: [lng, lat],
       zoom: zoom,
-      pitch: 60,
+      pitch: 33,
     });
 
     const mapboxDirections = new MapboxDirections({
