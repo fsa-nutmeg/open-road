@@ -19,13 +19,13 @@ export default class ReactReveal extends Component {
               <h1 style={styles.title}>We Take You Where You Want To Go</h1>
               <p style={styles.title2} className="Paragraph">
                 {" "}
-                Welcome to Open Road. We Created This Website With One Mission
-                In Mind: To Help Motorcyclists Find The Safest And Most Scenic
-                Routes Available. Using MapBox GL Technologies, Any One Can Plan
-                Their Next Road Trip While Not Having To Worry About Avoiding
-                Highways And Unsafe Riding Conditions. Additional Features
-                Include Saving Your Favorite Trips and Exploring Our Most
-                Popular Trips and News Aggregate Below.
+                Welcome to Open Road. We created this website with one mission
+                in mind: to help motorcyclists find the safest and most scenic
+                routes available. Using MapBox GL technologies, any one can plan
+                their next road trip while not having to worry about avoiding
+                highways and unsafe riding conditions. Additional features
+                include saving your favorite trips and exploring our most
+                popular trips and news aggregate below.
               </p>
             </div>
           </Fragment>
