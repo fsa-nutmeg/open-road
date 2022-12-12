@@ -38,8 +38,8 @@ container {
   width: 25vw;
   display: flex;
   position: absolute;
-  bottom: 30px;
-  left: 30px;
+  bottom: 90px;
+  left: 10px;
   /* border: 1px solid #000000; */
   z-index: 1;
 }
