@@ -3,7 +3,7 @@ import Fade from "react-reveal/Fade";
 import Wobble from "react-reveal/Wobble";
 
 import Home from "./Home";
-import NewsPage from "./NewsPage";
+
 export default class ReactReveal extends Component {
   render() {
     return (
@@ -30,9 +30,7 @@ export default class ReactReveal extends Component {
             </div>
           </Fragment>
         </div>
-        <Fade top>
-          <NewsPage />
-        </Fade>
+        <Fade top>{/* news */}</Fade>
       </Fragment>
     );
   }

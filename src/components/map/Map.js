@@ -33,7 +33,7 @@ export default function Map(props) {
       profile: "mapbox/driving",
       alternatives: false,
       geometries: "geojson",
-      controls: { instructions: true },
+      controls: { instructions: true, profileSwitcher: false },
       flyTo: true,
       exclude: "motorway",
     });
@@ -186,7 +186,6 @@ export default function Map(props) {
 
   if (redirect) return <Navigate to="/createTripForm" />;
   return (
-
     <div className="flex flex-col align-items-center justify-center">
       <div ref={mapContainer} className="map-container" />
       <div className="flex">

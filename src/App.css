@@ -15,6 +15,11 @@
   background-color: #fff;
 }
 
+.trips img {
+  height: 30vw;
+  width: 50vw;
+}
+
 #root {
   padding-top: 0;
 }
