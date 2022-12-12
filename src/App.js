@@ -10,9 +10,11 @@ import CreateTripForm from "./components/CreateTripForm";
 import SingleTrip from "./components/SingleTrip";
 import AllTrips from "./components/AllTrips";
 import SingleUser from "./components/SingleUser";
+import Navbar from "./components/Navbar";
 import { checkUser } from "./store/reducers/user";
 import { auth } from "./firebase-config";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import Footer from "./components/Footer";
 //import { fetchAllUsers } from './store/reducers/allUsers';
 //import { useEffect } from 'react';
 
@@ -30,9 +32,12 @@ function App() {
     console.log(allUsers);
   });*/
   const dispatch = useDispatch();
-  auth.onAuthStateChanged((authData) => {dispatch(checkUser(authData.uid, authData.email))})
+  auth.onAuthStateChanged((authData) => {
+    dispatch(checkUser(authData.uid, authData.email));
+  });
   return (
     <UserAuthContextProvider>
+      <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomeHome />} />
@@ -44,6 +49,7 @@ function App() {
         <Route path="/trips/:tripId" element={<SingleTrip />} />
         <Route path="/createTripForm" element={<CreateTripForm />} />
       </Routes>
+      <Footer />
     </UserAuthContextProvider>
   );
 }

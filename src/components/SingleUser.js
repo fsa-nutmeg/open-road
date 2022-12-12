@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +22,6 @@ const SingleUser = () => {
   }
   return (
     <div className="bg-gray-800">
-      <Navbar />
       <div className="flex flex-row justify-center items-center min-h-screen">
         <div className="content-center w-2/3">
           <div className="content-center items-center overflow-hidden bg-white shadow sm:rounded-lg">
