@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import News from "../components/news/News/News";
-import { BrowserRouter as Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { router } from "../components/news/config/config";
 import LoadingBar from "react-top-loading-bar";
 

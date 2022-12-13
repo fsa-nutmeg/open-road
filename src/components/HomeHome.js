@@ -10,7 +10,7 @@ export default class ReactReveal extends Component {
           <Home />
         </Fade>
         <div style={styles.block}>
-          <Fragment left>
+          <Fragment>
             <div>
               <p style={styles.title}>We Don't Take You Where You Need To Go</p>
               <p style={styles.title}>...</p>
