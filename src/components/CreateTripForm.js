@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createTrip } from "../store/reducers/trip";
-import Navbar from "./Navbar";
 
 const CreateTripForm = () => {
   const dispatch = useDispatch();

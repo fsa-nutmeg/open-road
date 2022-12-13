@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/userAuthContext";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewUser } from "../store/reducers/allUsers";
 import { fetchAllTrips } from "../store/reducers/allTrips";
 
 const SingleUser = () => {
@@ -21,7 +20,7 @@ const SingleUser = () => {
       });
       updates(myTrips);
     }
-  }, [allTrips, user]);
+  }, [allTrips, user, dispatch]);
 
   const navigate = useNavigate();
   const handleLogout = async () => {

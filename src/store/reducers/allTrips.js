@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { db } from '../../firebase-config';
-import { ref, child, get, push, update } from 'firebase/database';
+import { createSlice } from "@reduxjs/toolkit";
+import { db } from "../../firebase-config";
+import { ref, child, get } from "firebase/database";
 
 const dbRef = ref(db);
 
 // Slice
 const slice = createSlice({
-  name: 'allTrips',
+  name: "allTrips",
   initialState: {
     allTrips: [],
   },
@@ -23,7 +23,7 @@ export default slice.reducer;
 
 const { getAllTrips } = slice.actions;
 
-export const fetchAllTrips = () => async dispatch => {
+export const fetchAllTrips = () => async (dispatch) => {
   try {
     const snapshot = await get(child(dbRef, `/trips`));
     if (snapshot.exists()) {
@@ -34,7 +34,7 @@ export const fetchAllTrips = () => async dispatch => {
       });
       dispatch(getAllTrips(payload));
     } else {
-      return console.log('No data available');
+      return console.log("No data available");
     }
   } catch (err) {
     return console.log(err);

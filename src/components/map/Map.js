@@ -16,7 +16,6 @@ export default function Map(props) {
   const [mBDirections, setMBDirections] = useState(null);
   const [redirect, updateRedirect] = useState(false);
   const [routeDrawn, drawLine] = useState(false);
-  let mapboxDirections = null;
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -76,7 +75,7 @@ export default function Map(props) {
     });
 
     //route a trip
-  }, []);
+  });
 
   useEffect(() => {
     if (!routeDrawn && mBDirections !== null && props.coordinates) {

@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import user from "../store/reducers/user";
 import { useSelector } from "react-redux";
 import OpenRoadLogo from "../OpenRoadLogo.png";
 import DefaultUserPhoto from "../PngItem_6490124.png";
@@ -42,7 +41,7 @@ const Navbar = () => {
           </div>
 
           <div className="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400">
-            <img alt="Default User Photo" src={DefaultUserPhoto} />
+            <img alt="Default User" src={DefaultUserPhoto} />
           </div>
         </div>
       </NavLink>
