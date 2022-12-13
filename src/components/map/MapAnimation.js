@@ -28,10 +28,8 @@ function codeToAnimate(props) {
   // ]
   // this is the path the camera will look at
   const targetRoute = props.coordinates;
-  console.log("targetRoute", targetRoute);
   // this is the path the camera will move along
   const cameraRoute = props.coordinates.map(([x, y]) => [x, y - 160]);
-  console.log("cameraRoute", cameraRoute);
 
   // add terrain, sky, and line layers once the style has loaded
   map.on("load", (props) => {
@@ -62,25 +60,13 @@ function codeToAnimate(props) {
         "sky-atmosphere-sun-intensity": 15,
       },
     });
-    // map.addLayer({
-    //   type: "line",
-    //   source: "trace",
-    //   id: "line",
-    //   paint: {
-    //     "line-color": "black",
-    //     "line-width": 5,
-    //   },
-    //   layout: {
-    //     "line-cap": "round",
-    //     "line-join": "round",
-    //   },
-    // });
+    
   });
 
   // wait for the terrain and sky to load before starting animation
   map.on("load", () => {
     const animationDuration = 120000;
-    const cameraAltitude = 2500;
+    const cameraAltitude = 5500;
     // get the overall distance of each route so we can interpolate along them
     const routeDistance = lineDistance(lineString(targetRoute));
     const cameraRouteDistance = lineDistance(lineString(cameraRoute));
@@ -113,8 +99,6 @@ function codeToAnimate(props) {
       ).geometry.coordinates;
 
       const camera = map.getFreeCameraOptions();
-
-      // console.log("alongCamera", alongCamera);
 
       // set the position and altitude of the camera
       camera.position = mapboxgl.MercatorCoordinate.fromLngLat(

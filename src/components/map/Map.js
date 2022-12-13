@@ -76,39 +76,11 @@ export default function Map(props) {
     });
 
     //route a trip
-  });
+  }, []);
 
   useEffect(() => {
     if (!routeDrawn && mBDirections !== null && props.coordinates) {
-      console.log("drawing route line");
       const { coordinates } = props;
-
-      // map.current.on('load', () => {
-      //   map.current.addSource('route', {
-      //     type: 'geojson',
-      //     data: {
-      //       type: 'Feature',
-      //       properties: {},
-      //       geometry: {
-      //         type: 'LineString',
-      //         coordinates: coordinates,
-      //       },
-      //     },
-      //   });
-      //   map.current.addLayer({
-      //     id: 'route',
-      //     type: 'line',
-      //     source: 'route',
-      //     layout: {
-      //       'line-join': 'round',
-      //       'line-cap': 'round',
-      //     },
-      //     paint: {
-      //       'line-color': '#000000',
-      //       'line-width': 8,
-      //     },
-      //   });
-      // });
 
       mBDirections.setOrigin(coordinates[0]);
 
@@ -131,7 +103,6 @@ export default function Map(props) {
           "mapbox-directions-step"
         )[0];
         var canceled = !myTarget.dispatchEvent(event);
-        console.log("cancelled, ", canceled);
       }
       setTimeout(simulateMouseover, 3000);
     }
@@ -144,29 +115,6 @@ export default function Map(props) {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-  });
-
-  useEffect(() => {
-    /*
-    if (!map.current) return; // wait for map to initialize
-    console.log('useEffect Triggerd........');
-    console.log('map.current.on ', map.current.on);
-    map.current.on('origin', test => {
-      console.log('map origin: ');
-      console.log('origin test: ', test);
-      console.log(map.current.getOrigin());
-    });
-    map.current.on('destination', test => {
-      console.log('map destination: ');
-      console.log('dest test: ', test);
-      console.log(map.current.getDestination());
-    });
-    map.current.on('route', test => {
-      console.log('map route: ');
-      console.log('route test: ', test);
-      console.log(map.current.getRoute());
-    });
-    */
   });
 
   const handleClick = (e) => {
