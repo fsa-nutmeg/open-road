@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Fade from "react-reveal/Fade";
 import Home from "./Home";
-import NewsPage from "./NewsPage";
+
 export default class ReactReveal extends Component {
   render() {
     return (
@@ -29,7 +29,7 @@ export default class ReactReveal extends Component {
           </Fragment>
         </div>
         <Fade top>
-          <NewsPage />
+          
         </Fade>
       </Fragment>
     );

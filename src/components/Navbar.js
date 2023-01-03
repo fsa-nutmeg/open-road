@@ -21,9 +21,9 @@ const Navbar = () => {
         <NavLink className="bg-slate-800 rounded-md no-underline" to="/trips">
           <h4 className="text-white text-sm pl-2 pr-2 pt-1">Trips</h4>
         </NavLink>
-        <NavLink className="bg-slate-800 rounded-md no-underline" to="/news">
+        {/* <NavLink className="bg-slate-800 rounded-md no-underline" to="/news">
           <h4 className="text-white text-sm pl-2 pr-2 pt-1">News</h4>
-        </NavLink>
+        </NavLink> */}
       </div>
       <NavLink className="no-underline" to="/user">
         <div className="flex flex-shrink-0 items-center space-x-4 text-white">
